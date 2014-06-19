@@ -1,0 +1,49 @@
+<div class="row">
+	<h1>Contract Coding</h1>
+</div>
+
+</br>
+
+<div class="record-nav row">
+
+		<!--display active back nav options if not first model-->
+		<% if(activeModel !== 1) { %>
+			<div class="col-md-1">
+				<a href="#" id="nav-beginning"><span class="glyphicon glyphicon-fast-backward"></span></a> 
+				<a href="#" id="nav-backward"><span class="glyphicon glyphicon-backward"></span></a>
+			</div>
+		<% } else { %>
+			<div class="col-md-1">
+				<span class="glyphicon glyphicon-fast-backward"></span>
+				<span class="glyphicon glyphicon-backward"></span>
+			</div>
+		<% } %>
+
+		<!--always display input box-->
+		<div class="col-md-1">
+			<input type="text" id="nav-goto" class="form-control input-sm" value="<%=activeModel%>"/>
+		</div>
+
+		<!--display active forward nav options if not first model-->
+		<% if(activeModel !== totalModels) { %>
+			<div class="col-md-1">
+				<a href="#" id="nav-end"><span class="glyphicon glyphicon-forward"></span></a>
+				<a href="#" id="nav-forward"><span class="glyphicon glyphicon-fast-forward"></span></a> 
+			</div>
+		<% } else { %>
+			<div class="col-md-1">
+				<span class="glyphicon glyphicon-forward"></span>
+				<span class="glyphicon glyphicon-fast-forward"></span>
+			</div>
+		<% } %>
+
+		<div class="col-md-2">
+			<p>Record <%=activeModel%> of <%=totalModels%></p>
+		</div>
+
+</div>
+<br/>
+<div class="row">
+	<div id="table">
+	</div>
+</div>

@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 //paths to watch
 paths = {
   scripts: ['src/**/*.js', 'client/src/*.js'],
-  templates: ['src/templates/*.ejs']
+  templates: ['src/templates/*.html']
 };
 
 gulp.task('scripts', function() {
