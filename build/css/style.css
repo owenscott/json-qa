@@ -1,0 +1,24 @@
+td.val input {
+	display: none;
+}
+
+td.val label {
+	display: block;
+}
+
+td.val.edit label {
+	display: none;
+}
+
+td.val.edit input {
+	display: block;
+}
+
+/*thead {
+	background-color: darkblue;
+	color: white;
+}*/
+
+.click {
+	cursor: pointer;
+}
