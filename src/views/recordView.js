@@ -1,11 +1,14 @@
 var lib = require('./../lib/lib.js'),
 	Record = require('./../models/record.js'),
 	Row = require('./../models/row.js'),
-	RowView = require('./../views/rowView.js')
+	RowView = require('./../views/rowView.js');
+
+var	fs = require('fs');
 
 module.exports = lib.Backbone.View.extend({
 	
 	initialize: function() {
+		this.template = fs.readFileSync('./src/templates/table.html').toString();
 		this.render();
 	},
 
@@ -14,7 +17,8 @@ module.exports = lib.Backbone.View.extend({
 		var record = this.model,
 			self = this;
 
-
+		this.$el.html(this.template);
+		
 		//append all of the rows
 		lib._.each(this.model.attributes.merge, function(obj, key) {
 
@@ -27,7 +31,7 @@ module.exports = lib.Backbone.View.extend({
 				key: key
 			}));
 
-			rowEl = lib.$('<tr></tr>').appendTo(self.el);
+			rowEl = lib.$('<tr></tr>').appendTo(self.$('#table-body'));
 
 			//only for the sideffects
 			rowView = new RowView({

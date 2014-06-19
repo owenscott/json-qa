@@ -1,0 +1,21 @@
+	
+
+		<td><em><%= key %></em></td>
+		<td <% if (match) { %> class="success" <% } else if (a === value && a !== '') { %>  class="a success click"  <% } else if (a !== '') { %> class="a click" <% } %>	>
+			<%= a %>
+		</td>
+		<td
+			<% if (match && !cleanValue ) { %> class="val success click" <% } 
+			else if (cleanValue) { %> class="val info click" <% } 
+			else {	%> class="val click" <% } %>
+		>
+		<label class="click">
+			<% if (cleanValue && cleanValue !== '') { %><%= cleanValue %> <% } 
+			else { %> <%= value %> <% } %>
+		</label>
+			<input class="form-control" type="text" value="<%if(cleanValue){%><%=cleanValue%><%}else{%><%=value%><%}%>"/>
+		</td>
+		<td <% if (match) { %> class="success" <% } else if (b === value && b !== '') { %>  class="b success click"  <% } else if (b !== '') { %> class="b click" <% } %>	>
+			<%= b %>
+		</td>
+

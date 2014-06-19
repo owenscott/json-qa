@@ -1,36 +1,20 @@
 var Records = require('./collections/records.js'),
 	RecordView = require('./views/recordView.js'),
+	AppView = require('./views/appView.js'),
 	$ = require('jquery'),
-	records,
-	recordView
+	appView;
 
-// records = new Records([
-	// { a: { foo: 'bar', something: 'value' },
-	//   b: { foo: 'bar', something: 'different value' },
-	//  merge : {
-	//      foo : {
-	//          match : true,
-	//          source : 'MATCH',
-	//          value : 'bar',
-	//          cleanValue : '',
-	//          deleted : false
-	//      },
-	//      something : {
-	//          match : false,
-	//          source : '',
-	//          value : '',
-	//          cleanValue : '',
-	//          deleted : false
-	//      }
-	//  }
-	// }
-// ]);
+
+$(document).ready(function() {
+
+	var appView = new AppView({
+		el:'#app',
+		collection: new Records()
+	})
+// $('body').append('foo');
+
+})()
 
 
 
-(function() {
-
-	records = new Records();
-	
-})();
 

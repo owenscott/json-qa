@@ -31,7 +31,7 @@ module.exports = lib.Backbone.View.extend({
 	render: function () {
 
 		var key = this.model.attributes.key,
-			template = _.template( fs.readFileSync('./src/templates/row.ejs').toString() ),
+			template = _.template( fs.readFileSync('./src/templates/row.html').toString() ),
 			rowData;
 
 		//gets the dynamic data from the model itself and the static data from the reference to the parent
@@ -79,10 +79,12 @@ module.exports = lib.Backbone.View.extend({
 	},
 
 	stopEditing: function(e) {
+
 		var td = lib.$(e.target).closest('td'),
 			input,
 			newValue;
 
+		//find the actual <input/> element since the event could have been triggered by a click on a different element or propogated
 		if (	lib.$(e.target).find('input').length > 0) {
 			input = lib.$(e.target).find('input');
 		} 
