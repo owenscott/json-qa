@@ -32,7 +32,7 @@ module.exports = lib.Backbone.View.extend({
 			success: function(collection) {
 
 				//by default render the first model in the collection
-				self.setActiveModel(1);
+				self.setActiveModel(0);
 
 			},
 
