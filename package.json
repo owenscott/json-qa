@@ -1,5 +1,5 @@
 {
-  "name": "json-qa",
+  "name": "backbone-json-merge",
   "version": "0.0.1",
   "description": "A backbone.js user interface for resolving JSON merge conflicts and for cleaning JSON data.",
   "main": "app.js",
