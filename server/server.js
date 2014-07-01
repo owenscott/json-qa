@@ -1,4 +1,4 @@
-var hapiMedium = require('./../../hapi-medium'),
+var hapiMedium = require('hapi-medium'),
 	MongoHandler = require('./../../hm-mongodb-handler'),
 	handler = new MongoHandler('mongodb://localhost:27017/contracttest'),
 	fs = require('fs'),
