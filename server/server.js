@@ -1,11 +1,13 @@
 var hapiMedium = require('hapi-medium'),
 	MongoHandler = require('hm-mongodb-handler'),
-	handler = new MongoHandler('mongodb://localhost:27017/contracttest'),
-	fs = require('fs'),
-	routes,
 	_ = require('underscore'),
 	crypto = require('crypto'),
+	fs = require('fs'),
+	conf = JSON.parse(fs.readFileSync('./server/conf.json').toString()),
+	routes,
 	server;
+
+handler = new MongoHandler('mongodb://' + conf.baseUrl + ':' + conf.mongoPort + '/' + conf.mongoCollection);
 
 routes = [
 	{
@@ -16,8 +18,8 @@ routes = [
 ]		
 
 server = hapiMedium(routes, {
-	url:'localhost',
-	port: 8000
+	url: conf.baseUrl,
+	port: conf.port
 });
 
 server.route({

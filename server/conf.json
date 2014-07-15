@@ -1,0 +1,6 @@
+{
+	"port":"8000",
+	"mongoPort":"27017",
+	"mongoCollection":"contracttest",
+	"baseUrl": "localhost"
+}
