@@ -112,7 +112,7 @@ module.exports = lib.Backbone.View.extend({
 	},
 
 	navEnd: function() {
-		this.setActiveModel(this.collection.models.length - 1);
+		this.setActiveModel(this.collection.state.totalRecords - 1);
 	},
 
 	navGoto: function(e) {
