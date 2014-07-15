@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "hapi-medium": "0.0.1",
-    "hm-mongodb-handler": "0.0.1",
-    "mongodb": "^1.4.7"
+    "mongodb": "^1.4.7",
+    "hm-mongodb-handler": "0.0.2",
+    "underscore": "~1.6.0"
   }
 }
