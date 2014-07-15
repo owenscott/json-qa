@@ -15,5 +15,9 @@
     "gulp": "~3.8.0",
     "gulp-rename": "~1.2.0",
     "reactify": "~0.13.1"
+  },
+  "dependencies": {
+    "hapi-medium": "0.0.1",
+    "hm-mongodb-handler": "0.0.2"
   }
 }
