@@ -26,18 +26,22 @@ module.exports = lib.Backbone.View.extend({
 		this.template = lib._.template(fs.readFileSync('./src/templates/app.html').toString());
 		
 
-		this.collection.fetch({
+		// this.collection.fetch({
 
-			//had to inline success function in order to bind 'this' properly
-			success: function(collection) {
+		// 	//had to inline success function in order to bind 'this' properly
+		// 	success: function(collection) {
 
-				//by default render the first model in the collection
-				self.setActiveModel(0);
+		// 		//by default render the first model in the collection
+		// 		self.setActiveModel(0);
 
-			},
+		// 	},
 
-			error: this.onFetchError
+		// 	error: this.onFetchError
 		
+		// });
+
+		this.collection.getFirstPage().done(function() {
+			self.setActiveModel(0);
 		});
 
 	},
@@ -46,7 +50,7 @@ module.exports = lib.Backbone.View.extend({
 
 		this.$el.html(this.template({
 			activeModel: this._activeModel + 1,
-			totalModels: this.collection.models.length
+			totalModels: this.collection.state.totalRecords
 		}));
 
 		var table,
@@ -62,18 +66,35 @@ module.exports = lib.Backbone.View.extend({
 
 	setActiveModel: function(i) {
 
-		if (this.collection.models[i]) {
+		var self = this;
+
+		if ((!this.collection.models[i] || lib._.isEmpty(this.collection.models[i].attributes)) && i >= 0 && i <= this.collection.state.totalRecords) {
+			this.showRecordAsLoading(i);
+			this.collection.getPage(i).done(function() {
+				self._activeModel = i;
+				self.render();
+			})
+		}
+		else if (this.collection.models[i]) {
 			this._activeModel = i;
+			this.render();
 		}
 		else {
-			alert('Not a proper value');
+			alert('Value for record number must be between 1 and ' + this.collection.state.totalRecords);
 		}
 
-		this.render();
+	},
+
+	showRecordAsLoading: function(i) {
 		
+		this.$('#table').html('<h3>Loading Record ' + (i+1) + '...</h3>')
+	},
+
+	setErrorScreen: function() {
+
 	},
 		
-
+	
 	onFetchError: function() {
 		throw new Error('Error fetching models');
 	},

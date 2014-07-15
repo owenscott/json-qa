@@ -1,5 +1,5 @@
 var hapiMedium = require('hapi-medium'),
-	MongoHandler = require('hm-mongodb-handler'),
+	MongoHandler = require('./../../hm-mongodb-handler'),
 	_ = require('underscore'),
 	crypto = require('crypto'),
 	fs = require('fs'),
