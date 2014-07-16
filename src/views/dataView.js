@@ -1,13 +1,4 @@
-var lib = require('./../lib/lib.js'),
-	Record = require('./../models/record.js'),
-	Row = require('./../models/row.js'),
-	RowView = require('./../views/rowView.js');
-
-var	fs = require('fs');
-
-module.exports = lib.Backbone.View.extend({
-	
-	initialize: function() {
+			initialize: function() {
 		this.template = fs.readFileSync('./src/templates/table.html').toString();
 		console.log(this.model);
 		this.render();
@@ -44,4 +35,9 @@ module.exports = lib.Backbone.View.extend({
 
 	}
 
-});
+
+
+		
+			model: new DataModel(childModelData),
+
+		childModelData = lib._.extend(this.collection.models[this._activeModelIndex].get('data'), {parent: this.collection.models[this._activeModelIndex]});

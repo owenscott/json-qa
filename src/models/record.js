@@ -1,7 +1,5 @@
 var lib = require('./../lib/lib.js');
 
-
-
 //model assumes the {a:..., b:..., merge:..., arrays:...} structure used by the json-merge module
 
 module.exports = lib.Backbone.Model.extend({
@@ -10,14 +8,14 @@ module.exports = lib.Backbone.Model.extend({
 	
 	urlRoot: 'http://localhost:8000/api/contracts',
 
-	saveModel: function() {
-		this.save({
-			error: this.saveError
-		});
-	},
+	// saveModel: function() {
+	// 	this.save({
+	// 		error: this.saveError
+	// 	});
+	// },
 
 	initialize: function() {
-		this.on('change', this.saveModel, this);
+		// this.on('change', this.saveModel, this);
 	},
 
 	saveError: function() {
