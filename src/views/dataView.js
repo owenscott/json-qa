@@ -1,43 +1,72 @@
-			initialize: function() {
-		this.template = fs.readFileSync('./src/templates/table.html').toString();
-		console.log(this.model);
+var lib = require('./../lib/lib.js'),
+	Record = require('./../models/record.js'),
+	Row = require('./../models/row.js'),
+	RowView = require('./../views/rowView.js');
+
+var	fs = require('fs');
+
+module.exports = lib.Backbone.View.extend({
+	
+	initialize: function() {
+		this.template = lib._.template(fs.readFileSync('./src/templates/table.html').toString());
 		this.render();
 	},
 
 	render: function() {
 
 		var record = this.model,
-			self = this;
+			self = this,
+			omits = ['hash', 'CODER_ID','ID','coder','TENDER_NOTICE_ID'],
+			idField = 'coder';
 
-		this.$el.html(this.template);
-		
-		//append all of the rows
-		lib._.each(this.model.attributes.merge, function(obj, key) {
+		var numberOfColumns = this.model.attributes.keyValuePairs.originals.length,
+			columnIds = lib._.map(this.model.attributes.keyValuePairs.originals, function(o) {return o[idField] || ''})
 
-			var row,
-				rowEl,
-				rowView;
+		console.log(this.model.attributes.keyValuePairs.originals);
 
-			row = new Row ( lib._.extend( obj, {
-				parent: record,
-				key: key
-			}));
+		this.$el.html(this.template({
+			numberOfColumns: numberOfColumns,
+			columnIds: columnIds
+		}));
 
-			rowEl = lib.$('<tr></tr>').appendTo(self.$('#table-body'));
+		//iterate through all of the keys
+		lib._.each(this.model.attributes.keyValuePairs.merge, function(obj, key) {
+			
+			if (!lib._.contains(omits, key)) {
+	
+				var rowData = {},
+					sourceValues = [],
+					row,
+					rowEl,
+					rowView;
 
-			//only for the sideffects
-			rowView = new RowView({
-				model:row,
-				el: rowEl
-			})
-				
+				sourceValues = lib._.chain(self.model.attributes.keyValuePairs.originals).map(function(obj) { return lib._.clone(obj[key]) || ''}).value();
+	
+				//sanity check - should never throw
+				if (sourceValues.length !== numberOfColumns) {
+					throw 'Custom Error: Not as many sourveValues as columns';
+				}
+
+				rowData = lib._.chain(obj).clone().extend({sourceValues:sourceValues}).value();
+	
+				row = new Row ( lib._.extend( rowData, {
+					parent: record,
+					key: key
+				}));
+	
+				rowEl = lib.$('<tr></tr>').appendTo(self.$('#table-body'));
+	
+				//only for the sideffects
+				rowView = new RowView({
+					model:row,
+					el: rowEl
+				})}
+
 		})
-
 	}
 
+});
 
 
-		
-			model: new DataModel(childModelData),
 
-		childModelData = lib._.extend(this.collection.models[this._activeModelIndex].get('data'), {parent: this.collection.models[this._activeModelIndex]});
+

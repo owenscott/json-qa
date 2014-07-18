@@ -2,6 +2,17 @@
 //care about, instantiated with a reference to the parent. whenever this child model changes, it updates the parent. 
 //the parent itself is what syncs with the server
 
+// Object {match: false, source: 0, value: "Road Construction", cleanValue: "", deleted: false…}
+// cleanValue: ""
+// deleted: false
+// match: false
+// source: 0
+// sourceValues: Array[2]
+// value: "Road Construction"
+// __proto__: Object
+
+
+
 var lib = require('./../lib/lib.js'),
 	Row = require('./../models/row.js'),
 	_ = lib._;
@@ -13,18 +24,18 @@ module.exports = lib.Backbone.View.extend({
 	model: Row,
 
 	events: {
-		'click .a' : 'aHandler',
-		'click .b' : 'bHandler',
-		'click .a.success' : 'clearValue',
-		'click .b.success' : 'clearValue',
-		'dblclick .val' : 'edit',
-		'blur .edit' : 'stopEditing',
-		'keypress .edit' : 'blurOnEnter'
+		// 'click .a' : 'aHandler',
+		// 'click .b' : 'bHandler',
+		// 'click .a.success' : 'clearValue',
+		// 'click .b.success' : 'clearValue',
+		// 'dblclick .val' : 'edit',
+		// 'blur .edit' : 'stopEditing',
+		// 'keypress .edit' : 'blurOnEnter'
 	},
 
 	initialize: function() {
-		this.listenTo(this.model, 'change', this.render);
-		this.listenTo(this.model, 'change', this.updateParent);
+		// this.listenTo(this.model, 'change', this.render);
+		// this.listenTo(this.model, 'change', this.updateParent);
 		this.render();
 	},
 
@@ -36,7 +47,7 @@ module.exports = lib.Backbone.View.extend({
 
 		//gets the dynamic data from the model itself and the static data from the reference to the parent
 		rowData = _.omit( this.model.attributes, 'parent');
-		rowData = _.extend( rowData, {a: this.model.attributes.parent.attributes.a[key]}, {b: this.model.attributes.parent.attributes.b[key]} );
+		// rowData = _.extend( rowData, {a: this.model.attributes.parent.attributes.a[key]}, {b: this.model.attributes.parent.attributes.b[key]} );
 
 		this.$el.html(template(rowData));
 

@@ -14,11 +14,13 @@ td.val.edit input {
 	display: block;
 }
 
-/*thead {
+thead {
 	background-color: darkblue;
 	color: white;
-}*/
+}
 
 .click {
 	cursor: pointer;
 }
+
+	

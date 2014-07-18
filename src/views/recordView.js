@@ -1,45 +1,32 @@
-var lib = require('./../lib/lib.js'),
-	Record = require('./../models/record.js'),
-	Row = require('./../models/row.js'),
-	RowView = require('./../views/rowView.js');
+//instantiated by appView
+//has a record model
+//instantiates a dataView 
+//instantiates a data model which holds a reference to the record model
 
-var	fs = require('fs');
+var lib = require('./../lib/lib.js'),
+	Data = require('./../models/data.js'),
+	DataView = require('./../views/dataView.js');
+
+var fs = require('fs');
+
 
 module.exports = lib.Backbone.View.extend({
-	
+
 	initialize: function() {
-		this.template = fs.readFileSync('./src/templates/table.html').toString();
-		console.log(this.model);
+		this.template = lib._.template(fs.readFileSync('./src/templates/record.html').toString());
 		this.render();
 	},
 
 	render: function() {
-
-		var record = this.model,
-			self = this;
-
-		this.$el.html(this.template);
 		
-		//append all of the rows
-		lib._.each(this.model.attributes.merge, function(obj, key) {
+		var childModelData =  lib._.extend(this.model.attributes.get('data'), {parent: this.model}),
+			table;
 
-			var row,
-				rowEl,
-				rowView;
+		this.$el.html(this.template({}));
 
-			row = new Row ( lib._.extend( obj, {
-				parent: record,
-				key: key
-			}));
-
-			rowEl = lib.$('<tr></tr>').appendTo(self.$('#table-body'));
-
-			//only for the sideffects
-			rowView = new RowView({
-				model:row,
-				el: rowEl
-			})
-				
+		table = new DataView({
+			model: new Data(childModelData),
+			el: this.el
 		})
 
 	}

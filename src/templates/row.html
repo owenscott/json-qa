@@ -1,25 +1,17 @@
-	
 
-		<td><em><%= key %></em></td>
-		<!--left-->
-		<td <% if (match) { %> class="success" <% } else if (a === value && a !== '') { %>  class="a success click"  <% } else if (a !== '') { %> class="a click" <% } %>	>
-			<%= a %>
-		</td>
-		<!--middle-->
-		<td
-			<% if (match && !cleanValue ) { %> class="val click success" <% } 
-			else if (cleanValue) { %> class="val info click" <% } 
-			else if (value) { %> class="val success click" <% }
-			else {	%> class="val click warning" <% } %>
-		>
-			<label class="click">
-				<% if (cleanValue && cleanValue !== '') { %><%= cleanValue %> <% } 
-				else { %> <%= value %> <% } %>
-			</label>
-			<input class="form-control input-sm" type="text" value="<%if(cleanValue){%><%=cleanValue%><%}else{%><%=value%><%}%>"/>
-		</td>
-		<!--right-->
-		<td <% if (match) { %> class="success" <% } else if (b === value && b !== '') { %>  class="b success click"  <% } else if (b !== '') { %> class="b click" <% } %>	>
-			<%= b %>
-		</td>
 
+
+<td><%=key%></td>
+<% for (var i = 0; i < sourceValues.length; i++ )  { %> 
+	<td <% if(match || (value !== '' && value === sourceValues[i])) { %> class="success" <% } %>><%=sourceValues[i]%></td>
+	<% if (sourceValues.length === 2 && i === 0) { %>
+	 	<td <% if (value && !cleanValue) { %> class="success" <% } else if (cleanValue) { %> class="info" <%} else if (!value) { %> class="warning" <% } %> >
+	 		<%=value%>
+	 	</td>
+	<% } %>
+<% } %>
+<% if (sourceValues.length !== 2) { %>
+ 	<td <% if (value && !cleanValue) { %> class="success" <% } else if (cleanValue) { %> class="info" <%} else if (!value) { %> class="warning" <% } %> >
+ 		<%=value%>
+ 	</td>
+<% } %>

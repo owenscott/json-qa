@@ -4,7 +4,6 @@ var lib = require('./../lib/lib.js'),
 	Data = require('./../models/data.js'),
 	RowView = require('./../views/rowView.js'),
 	Records = require('./../collections/records.js'),
-	DataView = require('./../views/dataView.js'),
 	RecordView = require('./../views/recordView.js');
 
 var	fs = require('fs');
@@ -34,21 +33,20 @@ module.exports = lib.Backbone.View.extend({
 	},
 
 	render: function() {
-		var table,
-			tableEl;
+		var record,
+			recordEl;
 
 		//update nav UI and create an empty div for the table view
 		this.$el.html(this.template({
-			activeModelIndex: this._activeModelIndex + 1,
+			activeModel: this._activeModelIndex + 1,
 			totalModels: this.collection.state.totalRecords
 		}));
 
+		recordEl = this.$('#record');
 
-		tableEl = this.$('#table');
-
-		table = new RecordView ({
-			model: new RecordModel(this.collection.models[this._activeModelIndex]),
-			el: tableEl
+		record = new RecordView ({
+			model: new Record(this.collection.models[this._activeModelIndex]),
+			el: recordEl
 		});
 
 	},
