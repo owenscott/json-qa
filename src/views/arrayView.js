@@ -17,6 +17,8 @@ module.exports = lib.Backbone.View.extend({
 
 	render: function() {
 
+		console.log(this.model);
+
 		var matchedValues,
 			unmatchedValues = [];
 
@@ -39,33 +41,67 @@ module.exports = lib.Backbone.View.extend({
 
 	originalClickHandler: function(e) {
 		
+
+		//NOTE: it was in the originals all along! the horror
+		//fix later
+		//seriously, this is how it works: values are always in the originals array. never take them out. that's what's broken (look for _.without). otherwise it seems to work. 
+		console.log('original handler');
+
 		var i = lib.$(e.currentTarget).parent('.original-values').data('arrayref'),
 			value = e.currentTarget.innerHTML,
 			originalValues,
-			source;
+			source,
+			merge,
+			match;
 
-		var originalValues = lib._.clone(this.model.get('originals')),
-			merge = lib._.clone(this.model.get('merge'));
+		originalValues = lib._.clone(this.model.get('originals'));
+		merge = lib._.clone(this.model.get('merge'));
 
 		originalValues[i] = lib._.without(originalValues[i], value);
 
 		this.model.set('originals', lib._.clone(originalValues));
 
+		match = false;
+
+		lib._.without(lib._.range(originalValues.length), i).forEach (function(orig) {
+			if (originalValues[orig].indexOf(value) > -1) {
+				match = true;
+				source = 'MATCH' 
+			}
+			
+		});
+
+		if (source !== 'MATCH') {
+			source = i;
+		}
+		else {
+
+			//TODO: this is getting worse and worse! do something :/
+			originalValues = lib._.chain(originalValues).clone().map(function(arr) {
+				arr = lib._.without(arr, value);
+				return arr;
+			}).value();
+
+		}
+
 		merge.push({
 			cleanValue: '',
 			deleted: false,
-			match: false,
-			source: i,
+			match: match,
+			source: source,
 			value: value
 		});
 
 		this.model.set('merge', lib._.clone(merge));
+		this.model.set('originals', lib._.clone(originalValues));
 
 		this.render();
 		
 	},
 
 	finalClickHandler: function(e) {
+
+		console.log('final handler');
 		var value = e.currentTarget.innerHTML.trim(),
 			originalValues,
 			merge,
@@ -74,7 +110,7 @@ module.exports = lib.Backbone.View.extend({
 		source = lib._.find(this.model.get('merge'), function (m) {
 			return m.value.trim() === value.trim()
 		}).source;
-		merge = lib._.chain(this.model.get('merge')).clone().reject(function(m) {console.log(m.value); return m.value.trim() === value.trim()}).value();
+		merge = lib._.chain(this.model.get('merge')).clone().reject(function(m) {return m.value.trim() === value.trim()}).value();
 
 		// originalValues = this.model.get('originals');
 
