@@ -15,7 +15,7 @@ td.val.edit input {
 }
 
 thead {
-	background-color: darkblue;
+	background-color: #000746;
 	color: white;
 }
 
@@ -23,4 +23,16 @@ thead {
 	cursor: pointer;
 }
 
-	
+#table {
+	max-height:500px;
+	overflow-y:auto;
+}
+
+#locations button {
+	margin-bottom: 5px;
+}
+
+#locations table td {
+	text-align:center;
+	width: 400px;
+}

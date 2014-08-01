@@ -1,0 +1,28 @@
+<table class="table table-bordered">
+	<thead>
+		<tr><th>Values</th><th>Final Values</th><th>Values</th></tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td data-arrayRef="0" class="original-values">
+				<% for (var m in nonMatchs[0]) { %>
+					<button type="button" class="btn btn-sm btn-danger"><%=nonMatchs[0][m]%></button></br>
+				<% } %>
+			</td>
+			<td class="final-values">
+				<% for (var m in matchs) { %>
+					<button type="button" class="btn btn-sm <% if (matchs[m].match) { %>btn-success"<% } else { %>btn-info"<% } %> >
+						<%=matchs[m].value%>
+					</button>
+					</br>
+				<% } %>
+			</td>
+			<td data-arrayRef="1" class="original-values">
+				<% for (var m in nonMatchs[1]) { %>
+					<button type="button" class="btn btn-sm btn-danger"><%=nonMatchs[1][m]%></button></br>
+				<% } %>
+			</td>
+		</tr>
+
+	</tbody>
+</table>

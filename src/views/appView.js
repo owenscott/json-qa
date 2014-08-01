@@ -34,7 +34,8 @@ module.exports = lib.Backbone.View.extend({
 
 	render: function() {
 		var record,
-			recordEl;
+			recordEl,
+			recordId;
 
 		//update nav UI and create an empty div for the table view
 		this.$el.html(this.template({
@@ -44,8 +45,10 @@ module.exports = lib.Backbone.View.extend({
 
 		recordEl = this.$('#record');
 
+		var recordId = this.collection.models[this._activeModelIndex].get('_id');
+
 		record = new RecordView ({
-			model: new Record(this.collection.models[this._activeModelIndex]),
+			model: this.collection.get(recordId),
 			el: recordEl
 		});
 
@@ -55,7 +58,9 @@ module.exports = lib.Backbone.View.extend({
 		try {
 			var self = this;
 			this.clearErrorScreen();
+			console.log(this.collection.models[i]);
 			if ((!this.collection.models[i] || lib._.isEmpty(this.collection.models[i].attributes)) && i >= 0 && i <= this.collection.state.totalRecords) {
+				console.log('if');
 				this.showRecordAsLoading(i);
 				this.collection.getPage(i).done(function() {
 					self._activeModelIndex = i;
@@ -63,10 +68,12 @@ module.exports = lib.Backbone.View.extend({
 				})
 			}
 			else if (this.collection.models[i]) {
+				console.log('else if')
 				this._activeModelIndex = i;
 				this.render();
 			}
 			else {
+				console.log('else');
 				alert('Value for record number must be between 1 and ' + this.collection.state.totalRecords);
 			}
 		}

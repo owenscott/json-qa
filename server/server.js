@@ -7,7 +7,7 @@ var hapiMedium = require('hapi-medium'),
 	routes,
 	server;
 
-handler = new MongoHandler('mongodb://' + conf.baseUrl + ':' + conf.mongoPort + '/' + conf.mongoCollection);
+handler = new MongoHandler('mongodb://' + conf.baseUrl + ':' + conf.mongoPort + '/' + conf.mongoDatabase);
 
 routes = [
 	{
@@ -87,7 +87,35 @@ server.start();
 
 console.log('Routes: ');
 console.log(_.map(server.table(), function(r){return {route:r.path, method:r.method}}));
-console.log('Server listening on port 8000')
+console.log('Server listening on ' + conf.baseUrl + ':' + conf.port );
+console.log('...serving data from database: ' + conf.mongoDatabase );
+
+
+
+
+
+
+
+
+
+
+
+
+//==============================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function convertRecordToOcds(r) {
 	var result = {};

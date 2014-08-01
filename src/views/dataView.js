@@ -22,8 +22,6 @@ module.exports = lib.Backbone.View.extend({
 		var numberOfColumns = this.model.attributes.keyValuePairs.originals.length,
 			columnIds = lib._.map(this.model.attributes.keyValuePairs.originals, function(o) {return o[idField] || ''})
 
-		console.log(this.model.attributes.keyValuePairs.originals);
-
 		this.$el.html(this.template({
 			numberOfColumns: numberOfColumns,
 			columnIds: columnIds

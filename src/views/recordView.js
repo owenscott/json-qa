@@ -5,7 +5,9 @@
 
 var lib = require('./../lib/lib.js'),
 	Data = require('./../models/data.js'),
-	DataView = require('./../views/dataView.js');
+	Locations = require('./../models/array.js'),
+	DataView = require('./../views/dataView.js'),
+	LocationView = require('./../views/arrayView.js');
 
 var fs = require('fs');
 
@@ -19,15 +21,29 @@ module.exports = lib.Backbone.View.extend({
 
 	render: function() {
 		
-		var childModelData =  lib._.extend(this.model.attributes.get('data'), {parent: this.model}),
-			table;
+		var childModelData =  lib._.extend(this.model.get('data'), {parent: this.model}),
+			tableView,
+			locationView,
+			locationsMerge,
+			locationsOriginal;
 
 		this.$el.html(this.template({}));
 
-		table = new DataView({
+		tableView = new DataView({
 			model: new Data(childModelData),
-			el: this.el
-		})
+			el: this.$('#table')
+		});
+
+		// locationsMerge = this.model.attributes.data.arrays.merge.locations;
+		// locationsOriginal = this.model.attributes.data.arrays.originals.locations;
+
+		// locations = new LocationView({
+		// 	model: new Locations({
+		// 		originals:locationsOriginal,
+		// 		merge: locationsMerge
+		// 	}),
+		// 	el: this.$('#locations')
+		// });
 
 	}
 
