@@ -30,12 +30,16 @@ module.exports = lib.Backbone.View.extend({
 			self.setactiveModelIndex(0);
 		});
 
+		console.log('app done initializing');
+
 	},
 
 	render: function() {
 		var record,
 			recordEl,
 			recordId;
+
+		console.log('app rendering');
 
 		//update nav UI and create an empty div for the table view
 		this.$el.html(this.template({
@@ -46,6 +50,8 @@ module.exports = lib.Backbone.View.extend({
 		recordEl = this.$('#record');
 
 		var recordId = this.collection.models[this._activeModelIndex].get('_id');
+
+		console.log('passed form appview as ', this.collection.get(recordId));
 
 		record = new RecordView ({
 			model: this.collection.get(recordId),

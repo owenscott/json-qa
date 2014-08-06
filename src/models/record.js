@@ -9,12 +9,14 @@ module.exports = lib.Backbone.Model.extend({
 	urlRoot: 'http://localhost:8000/api/contracts',
 
 	saveModel: function() {
+		console.log('changed');
 		this.save({
 			error: this.saveError
 		});
 	},
 
 	initialize: function() {
+		console.log('new record model instantiated', JSON.stringify(this.attributes.data));
 		this.on('change', this.saveModel, this);
 	},
 

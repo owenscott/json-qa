@@ -21,6 +21,8 @@ module.exports = lib.Backbone.View.extend({
 
 	render: function() {
 		
+		console.log('record view model',this.model);
+
 		var childModelData =  lib._.extend(this.model.get('data'), {parent: this.model}),
 			tableView,
 			locationView,
@@ -40,7 +42,8 @@ module.exports = lib.Backbone.View.extend({
 		locations = new LocationView({
 			model: new Locations({
 				originals:locationsOriginal,
-				merge: locationsMerge
+				merge: locationsMerge,
+				parent: this.model
 			}),
 			el: this.$('#locations')
 		});
