@@ -24,17 +24,14 @@ module.exports = lib.Backbone.View.extend({
 	model: Row,
 
 	events: {
-		// 'click .a' : 'aHandler',
-		// 'click .b' : 'bHandler',
-		// 'click .a.success' : 'clearValue',
-		// 'click .b.success' : 'clearValue',
-		// 'dblclick .val' : 'edit',
-		// 'blur .edit' : 'stopEditing',
-		// 'keypress .edit' : 'blurOnEnter'
+		'click .original': 'selectHandler',
+		'dblclick .final' : 'edit',
+		'blur .edit' : 'stopEditing',
+		'keypress .edit' : 'blurOnEnter'
 	},
 
 	initialize: function() {
-		// this.listenTo(this.model, 'change', this.render);
+		this.listenTo(this.model, 'change', this.render);
 		// this.listenTo(this.model, 'change', this.updateParent);
 		this.render();
 	},
@@ -47,23 +44,23 @@ module.exports = lib.Backbone.View.extend({
 
 		//gets the dynamic data from the model itself and the static data from the reference to the parent
 		rowData = _.omit( this.model.attributes, 'parent');
-		// rowData = _.extend( rowData, {a: this.model.attributes.parent.attributes.a[key]}, {b: this.model.attributes.parent.attributes.b[key]} );
 
 		this.$el.html(template(rowData));
 
 	},
 
-	aHandler: function(event) {
-		this.model.set('value',this.model.attributes.parent.attributes.a[this.model.attributes.key]);
+	selectHandler: function(event) {
+		var i = lib.$(event.currentTarget).data('i'),
+			newValue = this.model.get('sourceValues')[i];
+
+		if (this.model.get('value') === newValue) {
+			this.model.set('value','');
+		}
+		else {
+			this.model.set('value', newValue);
+		}
 	},
 
-	clearValue: function(event) {
-		this.model.set('value', '');
-	},
-
-	bHandler: function(event) {
-		this.model.set('value',this.model.attributes.parent.attributes.b[this.model.attributes.key]);
-	},
 
 	updateParent: function() {
 

@@ -1,17 +1,16 @@
-
-
+<!--only works right now with 2 values-->
 
 <td><%=key%></td>
 <% for (var i = 0; i < sourceValues.length; i++ )  { %> 
-	<td <% if(match || (value !== '' && value === sourceValues[i])) { %> class="success" <% } %>><%=sourceValues[i]%></td>
+	<td data-i="<%=i%>"<% if((value !== '' && value === sourceValues[i])) { %> class="success click original" <% } else { %> class="click original"<%}%>><%=sourceValues[i]%></td>
 	<% if (sourceValues.length === 2 && i === 0) { %>
-	 	<td <% if (value && !cleanValue) { %> class="success" <% } else if (cleanValue) { %> class="info" <%} else if (!value) { %> class="warning" <% } %> >
+	 	<td <% if (value && !cleanValue) { %> class="success final click" <% } else if (cleanValue) { %> class="info final click" <%} else if (!value) { %> class="warning final click" <% } %> >
 	 		<%=value%>
 	 	</td>
 	<% } %>
 <% } %>
 <% if (sourceValues.length !== 2) { %>
- 	<td <% if (value && !cleanValue) { %> class="success" <% } else if (cleanValue) { %> class="info" <%} else if (!value) { %> class="warning" <% } %> >
- 		<%=value%>
+ 	<td <% if (value && !cleanValue) { %> class="success final click" <% } else if (cleanValue) { %> class="info final click" <%} else if (!value) { %> class="warning final click" <% } %> >
+ 		<%=value%> 
  	</td>
 <% } %>

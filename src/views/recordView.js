@@ -31,22 +31,22 @@ module.exports = lib.Backbone.View.extend({
 
 		this.$el.html(this.template({}));
 
-		// tableView = new DataView({
-		// 	model: new Data(childModelData),
-		// 	el: this.$('#table')
-		// });
+		tableView = new DataView({
+			model: new Data(childModelData),
+			el: this.$('#table')
+		});
 
 		locationsMerge = this.model.get('data').arrays.merge.locations;
 		locationsOriginal = this.model.get('data').arrays.originals.locations;
 
-		locations = new LocationView({
-			model: new Locations({
-				originals:locationsOriginal,
-				merge: locationsMerge,
-				parent: this.model
-			}),
-			el: this.$('#locations')
-		});
+		// locations = new LocationView({
+		// 	model: new Locations({
+		// 		originals:locationsOriginal,
+		// 		merge: locationsMerge,
+		// 		parent: this.model
+		// 	}),
+		// 	el: this.$('#locations')
+		// });
 
 	}
 
