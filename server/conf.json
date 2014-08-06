@@ -2,5 +2,5 @@
 	"port":"8000",
 	"mongoPort":"27017",
 	"mongoDatabase":"contracttest3",
-	"baseUrl": "localhost"
+	"baseUrl": "0.0.0.0"
 }

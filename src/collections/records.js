@@ -9,7 +9,7 @@ module.exports = PageableCollection.extend({
 	model: Record,
 
 	initialize: function() {
-		this.url = 'http://localhost:8000/api/contracts';
+		this.url = 'http://0.0.0.0:8000/api/contracts';
 	},
 
 	state: {

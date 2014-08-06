@@ -26,10 +26,6 @@ module.exports = lib.Backbone.View.extend({
 
 		this.template = lib._.template(fs.readFileSync('./src/templates/app.html').toString());
 
-		this.collection.getFirstPage().done(function() {
-			self.setactiveModelIndex(0);
-		});
-
 	},
 
 	render: function() {
@@ -58,14 +54,22 @@ module.exports = lib.Backbone.View.extend({
 		try {
 			var self = this;
 			this.clearErrorScreen();
-			if ((!this.collection.models[i] || lib._.isEmpty(this.collection.models[i].attributes)) && i >= 0 && i <= this.collection.state.totalRecords) {
+			if (!this.collection.models.length) {
+				this.collection.getPage(i).done(function() {
+					self.setactiveModelIndex(i);
+				})
+			}
+			else if ((!this.collection.models[i] || lib._.isEmpty(this.collection.models[i].attributes)) && i >= 0 && i <= this.collection.state.totalRecords) {
 				this.showRecordAsLoading(i);
 				this.collection.getPage(i).done(function() {
 					self._activeModelIndex = i;
+					console.log('navigating');
+					self.router.navigate('contracts/' + parseInt((i + 1)))
 					self.render();
 				})
 			}
 			else if (this.collection.models[i]) {
+				this.router.navigate('contracts/' + parseInt((i + 1)))
 				this._activeModelIndex = i;
 				this.render();
 			}
@@ -99,19 +103,23 @@ module.exports = lib.Backbone.View.extend({
 		throw new Error('Error fetching models');
 	},
 
-	navForward: function() {
+	navForward: function(e) {
+		e.preventDefault();
 		this.setactiveModelIndex(this._activeModelIndex + 1);
 	},
 
-	navBackward: function() {
+	navBackward: function(e) {
+		e.preventDefault();
 		this.setactiveModelIndex(this._activeModelIndex - 1);
 	},
 
-	navBeginning: function() {
+	navBeginning: function(e) {
+		e.preventDefault();
 		this.setactiveModelIndex(0);
 	},
 
-	navEnd: function() {
+	navEnd: function(e) {
+		e.preventDefault();
 		this.setactiveModelIndex(this.collection.state.totalRecords - 1);
 	},
 
