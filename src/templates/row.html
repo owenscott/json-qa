@@ -1,16 +1,39 @@
 <!--only works right now with 2 values-->
 
 <td><%=key%></td>
+
+<!--loop through all values-->
 <% for (var i = 0; i < sourceValues.length; i++ )  { %> 
+
+	<!--original values-->
 	<td data-i="<%=i%>"<% if((value !== '' && value === sourceValues[i])) { %> class="success click original" <% } else { %> class="click original"<%}%>><%=sourceValues[i]%></td>
+
+	<!--matched value-->
 	<% if (sourceValues.length === 2 && i === 0) { %>
-	 	<td <% if (value && !cleanValue) { %> class="success final click" <% } else if (cleanValue) { %> class="info final click" <%} else if (!value) { %> class="warning final click" <% } %> >
-	 		<%=value%>
+	 	<td
+	 		<% if (value && !cleanValue ) { %> class="final click success" <% } 
+	 		else if (cleanValue) { console.log('theres a value')%> class="final info click" <% } 
+	 		else if (value) { %> class="final success click" <% }
+	 		else {	%> class="final click warning" <% } %>
+	 	>
+	 		<label class="click">
+	 			<% if (cleanValue && cleanValue !== '') { %><%= cleanValue %> <% } 
+	 			else { %> <%= value %> <% } %>
+	 		</label>
+	 		<input class="form-control input-sm" type="text" value="<%if(cleanValue){%><%=cleanValue%><%}else{%><%=value%><%}%>"/>
 	 	</td>
 	<% } %>
+
+<!--end loop-->
 <% } %>
-<% if (sourceValues.length !== 2) { %>
+
+<!--matched value at end if necessary-->
+
+<!--<% if (sourceValues.length !== 2) { %>
  	<td <% if (value && !cleanValue) { %> class="success final click" <% } else if (cleanValue) { %> class="info final click" <%} else if (!value) { %> class="warning final click" <% } %> >
  		<%=value%> 
  	</td>
-<% } %>
+<% } %>-->
+
+
+

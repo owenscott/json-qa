@@ -11,6 +11,8 @@
 // value: "Road Construction"
 // __proto__: Object
 
+//model is row
+//model's parent is data
 
 
 var lib = require('./../lib/lib.js'),
@@ -32,7 +34,7 @@ module.exports = lib.Backbone.View.extend({
 
 	initialize: function() {
 		this.listenTo(this.model, 'change', this.render);
-		// this.listenTo(this.model, 'change', this.updateParent);
+		this.listenTo(this.model, 'change', this.updateParent);
 		this.render();
 	},
 
@@ -64,20 +66,24 @@ module.exports = lib.Backbone.View.extend({
 
 	updateParent: function() {
 
-		//take the values for the row and apply them back as a patch to the parent object
+		//NEW: this really shouldn't exist
+		//trying to keep inter-model updating logic in models
 
-		var newRowValue = _.omit(this.model.attributes, 'parent', 'key'),
-			newMerge = _.clone(this.model.attributes.parent.get('merge')),
-			i;
 
-		newMerge[this.model.get('key')] = _.clone(newRowValue);
+		// //take the values for the row and apply them back as a patch to the parent object
 
-		//hack (there's some object refernece in the parent child that is causing circular json)
-		for (i in newMerge) {
-			newMerge[i] = _.omit(newMerge[i], 'parent', 'key');
-		}
+		// var newRowValue = _.omit(this.model.attributes, 'parent', 'key'),
+		// 	newMerge = _.clone(this.model.attributes.parent.get('merge')),
+		// 	i;
 
-		this.model.attributes.parent.set('merge', _.clone(newMerge));
+		// newMerge[this.model.get('key')] = _.clone(newRowValue);
+
+		// //hack (there's some object refernece in the parent child that is causing circular json)
+		// for (i in newMerge) {
+		// 	newMerge[i] = _.omit(newMerge[i], 'parent', 'key');
+		// }
+
+		// this.model.attributes.parent.set('merge', _.clone(newMerge));
 
 	},
 

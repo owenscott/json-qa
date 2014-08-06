@@ -21,8 +21,6 @@ module.exports = lib.Backbone.View.extend({
 
 	render: function() {
 		
-		console.log('record view model',this.model);
-
 		var childModelData =  lib._.extend(this.model.get('data'), {parent: this.model}),
 			tableView,
 			locationView,

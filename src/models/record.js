@@ -16,7 +16,11 @@ module.exports = lib.Backbone.Model.extend({
 	},
 
 	initialize: function() {
-		this.on('change', this.saveModel, this);
+		this.on('childUpdate', function() {
+			console.log('record model updated');
+			console.log(this.attributes);
+			this.saveModel();
+		})
 	},
 
 	saveError: function() {

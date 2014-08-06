@@ -1,16 +1,16 @@
-td.val input {
+td.final input {
 	display: none;
 }
 
-td.val label {
+td.final label {
 	display: block;
 }
 
-td.val.edit label {
+td.final.edit label {
 	display: none;
 }
 
-td.val.edit input {
+td.final.edit input {
 	display: block;
 }
 
