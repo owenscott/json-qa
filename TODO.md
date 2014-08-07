@@ -1,6 +1,3 @@
-- rebuild view to take the new data model
-- work in batches
-- work in the concept of a coding being "done"
-- build a list view to chose which ones are done and which ones aren't
-- auth and user sessions
-- coder statistics
+- metadata (done/not done)
+- arrays
+- original scrape data

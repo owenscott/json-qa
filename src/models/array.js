@@ -1,24 +1,22 @@
-//parent is data
+//parent is record
 
 var lib = require('./../lib/lib.js');
 
 module.exports = lib.Backbone.Model.extend({
 	
-	defaults: {
-		originals: [],
-		merge: []
+	initialize: function() {
+		this.on('updateParent', this.updateParent);
 	},
 
-	initialize: function() {
-		var self = this;
-		console.log ('original parent', self.get('parent'));
-
-		this.on('change', function() {
-			var tempParentData = self.get('parent').attributes.data;
-			tempParentData.arrays.merge = lib._.clone(self.get('merge'));
-			tempParentData.arrays.originals = lib._.clone(self.get('originals'));
-			self.get('parent').set('data', lib._.clone(tempParentData));
-		})
+	updateParent: function() {
+		console.log('array model updated')
+		var tempData = lib._.omit(this.get('parent').get('data'),'parent');
+		console.log(JSON.stringify(tempData.arrays));
+		tempData.arrays.merge.locations = this.get('merge');
+		tempData.arrays.originals.locations = this.get('originals');
+		this.get('parent').set('data', lib._.clone(tempData));
+		this.get('parent').trigger('childUpdate');
+		
 	}
 
 });

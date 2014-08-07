@@ -6,7 +6,7 @@ module.exports = lib.Backbone.Model.extend({
 
 	idAttribute: '_id',
 	
-	urlRoot: 'http://localhost:8000/api/contracts',
+	urlRoot: 'http://0.0.0.0:8000/api/contracts',
 
 	saveModel: function() {
 		console.log('parent model has been saved');

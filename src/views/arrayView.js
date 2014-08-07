@@ -76,6 +76,7 @@ module.exports = lib.Backbone.View.extend({
 		this.model.set('merge', lib._.clone(merge));
 		this.model.set('originals', lib._.clone(originalValues));
 
+		this.model.trigger('updateParent');
 		this.render();
 		
 	},
@@ -105,6 +106,7 @@ module.exports = lib.Backbone.View.extend({
 		// }
 
 		this.model.set('merge', lib._.clone(merge));
+		this.model.trigger('updateParent');
 		// this.model.set('originals', lib._.clone(originalValues));
 
 		this.render();
