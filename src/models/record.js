@@ -1,12 +1,16 @@
 var lib = require('./../lib/lib.js');
 
+var fs = require('fs');
+
+var	conf = JSON.parse(fs.readFileSync('./server/conf.json').toString());
+
 //model assumes the {a:..., b:..., merge:..., arrays:...} structure used by the json-merge module
 
 module.exports = lib.Backbone.Model.extend({
 
 	idAttribute: '_id',
 	
-	urlRoot: 'http://0.0.0.0:8000/api/contracts',
+	urlRoot: 'http://' + conf.baseURL + ':' + conf.port + '/api/contracts',
 
 	saveModel: function() {
 
@@ -22,6 +26,8 @@ module.exports = lib.Backbone.Model.extend({
 		this.on('childUpdate', function() {
 			this.saveModel();
 		})
+
+		console.log(this.urlRoot);
 	},
 
 	saveError: function() {

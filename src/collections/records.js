@@ -1,6 +1,10 @@
 var lib = require('./../lib/lib.js'),
 	Record = require('./../models/record.js'),
 	RecordView = require('./../views/recordView.js');
+	
+var fs = require('fs');
+
+var conf = JSON.parse(fs.readFileSync('./server/conf.json').toString());
 
 var PageableCollection = require('backbone.paginator');
 
@@ -9,7 +13,8 @@ module.exports = PageableCollection.extend({
 	model: Record,
 
 	initialize: function() {
-		this.url = 'http://0.0.0.0:8000/api/contracts';
+		this.url = 'http://' + conf.baseUrl + ':' + conf.port + '/api/contracts';
+		console.log(this.url);
 	},
 
 	state: {
