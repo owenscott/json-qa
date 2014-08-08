@@ -7,7 +7,9 @@ var lib = require('./../lib/lib.js'),
 	Data = require('./../models/data.js'),
 	Locations = require('./../models/array.js'),
 	DataView = require('./../views/dataView.js'),
-	LocationView = require('./../views/arrayView.js');
+	LocationView = require('./../views/arrayView.js'),
+	Meta = require('./../models/meta.js'),
+	MetaView = require('./../views/metaView.js');
 
 var fs = require('fs');
 
@@ -16,6 +18,7 @@ module.exports = lib.Backbone.View.extend({
 
 	initialize: function() {
 		this.template = lib._.template(fs.readFileSync('./src/templates/record.html').toString());
+		console.log(this.model.attributes);
 		this.render();
 	},
 
@@ -25,7 +28,8 @@ module.exports = lib.Backbone.View.extend({
 			tableView,
 			locationView,
 			locationsMerge,
-			locationsOriginal;
+			locationsOriginal,
+			metadata;
 
 		this.$el.html(this.template({}));
 
@@ -45,6 +49,16 @@ module.exports = lib.Backbone.View.extend({
 			}),
 			el: this.$('#locations')
 		});
+
+		metadata = lib._.clone(this.model.get('meta'));
+		metadata = lib._.extend(metadata, {parent: this.model});
+
+		metaView = new MetaView({
+			model: new Meta(metadata),
+			el: this.$('#meta')
+		});
+
+		metaView.render();
 
 	}
 

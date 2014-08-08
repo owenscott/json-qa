@@ -9,7 +9,10 @@ module.exports = lib.Backbone.Model.extend({
 	urlRoot: 'http://0.0.0.0:8000/api/contracts',
 
 	saveModel: function() {
-		console.log('parent model has been saved');
+
+		//TODO: remove this. total monkey patch to make up for accidental appending of self as child of 'data' somewhere
+		this.set('data', lib._.omit(this.get('data'),'parent'));
+
 		this.save({
 			error: this.saveError
 		});
@@ -17,8 +20,6 @@ module.exports = lib.Backbone.Model.extend({
 
 	initialize: function() {
 		this.on('childUpdate', function() {
-			console.log('record model updated');
-			console.log(this.attributes);
 			this.saveModel();
 		})
 	},

@@ -52,44 +52,25 @@ module.exports = lib.Backbone.View.extend({
 	},
 
 	selectHandler: function(event) {
-		var i = lib.$(event.currentTarget).data('i'),
-			newValue = this.model.get('sourceValues')[i];
+		if (this.model.get('parent').get('parent').get('meta').status === 'open') {	
+			var i = lib.$(event.currentTarget).data('i'),
+				newValue = this.model.get('sourceValues')[i];
 
-		if (this.model.get('value') === newValue) {
-			this.model.set('value','');
-		}
-		else {
-			this.model.set('value', newValue);
+			if (this.model.get('value') === newValue) {
+				this.model.set('value','');
+			}
+			else {
+				this.model.set('value', newValue);
+			}
 		}
 	},
 
-
-	updateParent: function() {
-
-		//NEW: this really shouldn't exist
-		//trying to keep inter-model updating logic in models
-
-
-		// //take the values for the row and apply them back as a patch to the parent object
-
-		// var newRowValue = _.omit(this.model.attributes, 'parent', 'key'),
-		// 	newMerge = _.clone(this.model.attributes.parent.get('merge')),
-		// 	i;
-
-		// newMerge[this.model.get('key')] = _.clone(newRowValue);
-
-		// //hack (there's some object refernece in the parent child that is causing circular json)
-		// for (i in newMerge) {
-		// 	newMerge[i] = _.omit(newMerge[i], 'parent', 'key');
-		// }
-
-		// this.model.attributes.parent.set('merge', _.clone(newMerge));
-
-	},
 
 	edit: function(e) {
-		var el = lib.$(e.target).closest('td');
-		el.addClass('edit');
+		if (this.model.get('parent').get('parent').get('meta').status === 'open') {		
+			var el = lib.$(e.target).closest('td');
+			el.addClass('edit');
+		}
 	},
 
 	stopEditing: function(e) {
