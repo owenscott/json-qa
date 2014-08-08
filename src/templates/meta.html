@@ -1,0 +1,24 @@
+</br>
+<div class="row">
+	<div class="cod-md-1">
+	</div>
+	<div class="col-md-2">
+		<h4><span class="label <%if (status==='closed') { %> label-success <%} else {%> label-danger<%}%>">Status: <%=status%> </span></h4>
+	</div>
+	<div class="col-md-4">
+		<form class="form-inline" role="form">
+		  <div class="form-group">
+				<div class="input-group">
+					
+					<span class="input-group-btn">
+						<input id="coderName" class="form-control" type="text" placeholder="Coder Name">
+						<button id="modify" type="button" class="btn <% if (status==='open') { %>btn-info">Close Contract</button><% } else { %>btn-info">Re-Open Contract</button><% } %>
+					</span>
+				</div>
+			</div>
+		</form>
+	</div>
+
+</div>
+</br>
+</br>
