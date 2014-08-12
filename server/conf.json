@@ -1,9 +1,10 @@
 {
 	"port":"8000",
+	"clientPort":"80",
 	"mongoPort":"27017",
 	"mongoDatabase":"contracttest3",
-	"mongoUrl": "localhost",
-	"baseUrl": "0.0.0.0",
+	"mongoUrl": "127.0.0.1",
+	"baseUrl": "127.0.0.1",
 	"clientUrl": "162.243.254.170"
 }
 
