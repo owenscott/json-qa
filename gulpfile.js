@@ -13,7 +13,7 @@ paths = {
 };
 
 gulp.task('scripts', function() {
-    gulp.src('src/app.js')
+    gulp.src('./src/app.js')
     .pipe(browserify({
     	debug:true,
       transform: [brfs, reactify]
