@@ -7,7 +7,7 @@ var hapiMedium = require('hapi-medium'),
 	routes,
 	server;
 
-handler = new MongoHandler('mongodb://' + conf.baseUrl + ':' + conf.mongoPort + '/' + conf.mongoDatabase);
+handler = new MongoHandler('mongodb://' + conf.mongoUrl + ':' + conf.mongoPort + '/' + conf.mongoDatabase);
 
 routes = [
 	{

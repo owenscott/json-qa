@@ -10,7 +10,7 @@ module.exports = lib.Backbone.Model.extend({
 
 	idAttribute: '_id',
 	
-	urlRoot: 'http://' + conf.baseURL + ':' + conf.port + '/api/contracts',
+	urlRoot: 'http://' + conf.clientUrl + ':' + conf.port + '/api/contracts',
 
 	saveModel: function() {
 

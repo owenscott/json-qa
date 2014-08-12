@@ -13,7 +13,7 @@ module.exports = PageableCollection.extend({
 	model: Record,
 
 	initialize: function() {
-		this.url = 'http://' + conf.baseUrl + ':' + conf.port + '/api/contracts';
+		this.url = 'http://' + conf.clientUrl + ':' + conf.port + '/api/contracts';
 		console.log(this.url);
 	},
 
