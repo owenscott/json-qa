@@ -28,6 +28,8 @@ module.exports = lib.Backbone.Model.extend({
 		})
 
 		console.log(this.urlRoot);
+		
+		console.log(this.get('scraped'));
 	},
 
 	saveError: function() {

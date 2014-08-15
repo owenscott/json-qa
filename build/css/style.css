@@ -23,7 +23,7 @@ thead {
 	cursor: pointer;
 }
 
-#table {
+.overflow-table {
 	max-height:500px;
 	overflow-y:auto;
 }

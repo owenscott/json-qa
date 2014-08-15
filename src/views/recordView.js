@@ -9,7 +9,9 @@ var lib = require('./../lib/lib.js'),
 	DataView = require('./../views/dataView.js'),
 	LocationView = require('./../views/arrayView.js'),
 	Meta = require('./../models/meta.js'),
-	MetaView = require('./../views/metaView.js');
+	MetaView = require('./../views/metaView.js'),
+	ScrapedView = require('./../views/scrapedView.js'),
+	Scraped = require('./../models/scraped.js');
 
 var fs = require('fs');
 
@@ -29,10 +31,24 @@ module.exports = lib.Backbone.View.extend({
 			locationView,
 			locationsMerge,
 			locationsOriginal,
-			metadata;
+			metadata,
+			scraped,
+			scrapedView;
+		
+		console.log('recordView is rendering');
+		
+
 
 		this.$el.html(this.template({}));
 
+		scraped = this.model.get('scraped');
+		
+		scrapedView = new ScrapedView({
+			el: this.$('#scraped'),
+			model: new Scraped(scraped)
+		});
+		
+		
 		tableView = new DataView({
 			model: new Data(childModelData),
 			el: this.$('#table')

@@ -13,13 +13,13 @@ paths = {
 };
 
 gulp.task('scripts', function() {
-    gulp.src('./src/app.js')
+    gulp.src('src/app.js')
     .pipe(browserify({
     	debug:true,
       transform: [brfs, reactify]
     }))
     .pipe(rename('bundle.js'))
-    .pipe(gulp.dest('./build/js'))
+    .pipe(gulp.dest('build/js'))
 });
 
 gulp.task('watch', function() {
