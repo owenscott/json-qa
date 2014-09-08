@@ -1,11 +1,9 @@
 {
 	"port":"8000",
-	"clientPort":"80",
+	"clientPort":"8000",
 	"mongoPort":"27017",
-	"mongoDatabase":"contractqab3",
+	"mongoDatabase":"contractqab2",
 	"mongoUrl": "127.0.0.1",
 	"baseUrl": "127.0.0.1",
-	"clientUrl": "162.243.254.170"
+	"clientUrl": "127.0.0.1"
 }
-
-
